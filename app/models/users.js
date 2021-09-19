@@ -9,7 +9,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     email: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: false,
+      unique: "email"
     },
     username: {
       type: DataTypes.STRING(500),
@@ -30,7 +31,11 @@ module.exports = function(sequelize, DataTypes) {
     role_id: {
       type: DataTypes.BIGINT,
       allowNull: false,
-      defaultValue: 2
+      defaultValue: 2,
+      references: {
+        model: 'roles',
+        key: 'id'
+      }
     },
     created_at: {
       type: DataTypes.DATE,
@@ -56,6 +61,21 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "email",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "email" },
+        ]
+      },
+      {
+        name: "role_id",
+        using: "BTREE",
+        fields: [
+          { name: "role_id" },
         ]
       },
     ]

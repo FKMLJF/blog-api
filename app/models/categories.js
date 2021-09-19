@@ -7,26 +7,26 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    english_name: {
-      type: DataTypes.STRING(500),
-      allowNull: true
+    lang_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: 'lang',
+        key: 'id'
+      }
     },
-    hungarian_name: {
-      type: DataTypes.STRING(500),
+    name: {
+      type: DataTypes.STRING(100),
       allowNull: false
-    },
-    german_name: {
-      type: DataTypes.STRING(500),
-      allowNull: true
     },
     published: {
       type: DataTypes.TINYINT,
-      allowNull: false,
+      allowNull: true,
       defaultValue: 1
     },
     created_at: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
@@ -40,6 +40,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "lang_id",
+        using: "BTREE",
+        fields: [
+          { name: "lang_id" },
         ]
       },
     ]
