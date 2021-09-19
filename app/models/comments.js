@@ -9,11 +9,19 @@ module.exports = function(sequelize, DataTypes) {
     },
     user_id: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
     post_id: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'posts',
+        key: 'id'
+      }
     },
     comment: {
       type: DataTypes.TEXT,
@@ -44,6 +52,20 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "user_id",
+        using: "BTREE",
+        fields: [
+          { name: "user_id" },
+        ]
+      },
+      {
+        name: "post_id",
+        using: "BTREE",
+        fields: [
+          { name: "post_id" },
         ]
       },
     ]

@@ -9,23 +9,31 @@ module.exports = function(sequelize, DataTypes) {
     },
     category_id: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'categories',
+        key: 'id'
+      }
     },
     user_id: {
       type: DataTypes.BIGINT,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
     body: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    english_body: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    german_body: {
-      type: DataTypes.TEXT,
-      allowNull: true
+    lang_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      references: {
+        model: 'lang',
+        key: 'id'
+      }
     },
     created_at: {
       type: DataTypes.DATE,
@@ -52,6 +60,27 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
+        ]
+      },
+      {
+        name: "category_id",
+        using: "BTREE",
+        fields: [
+          { name: "category_id" },
+        ]
+      },
+      {
+        name: "user_id",
+        using: "BTREE",
+        fields: [
+          { name: "user_id" },
+        ]
+      },
+      {
+        name: "lang_id",
+        using: "BTREE",
+        fields: [
+          { name: "lang_id" },
         ]
       },
     ]
