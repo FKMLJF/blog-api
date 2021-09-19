@@ -12,6 +12,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome my blog API" });
 });
 
+require("./app/routes/category.route.js")(app);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
